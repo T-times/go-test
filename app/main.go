@@ -35,10 +35,25 @@ func tadyinterview(response http.ResponseWriter, r *http.Request) {
 	fmt.Println("Endpoint", interviewtype)
 }
 
+func tadyinterview_test(response http.ResponseWriter, r *http.Request) {
+	interviewtype := []interview{
+		interview{
+			Message:   "hello world /tadyinterview_test",
+			Timestamp: 07022021,
+		},
+	}
+
+	json.NewEncoder(response).Encode(interviewtype)
+
+	fmt.Println("Endpoint", interviewtype)
+}
+
 // http请求
 func request() {
-	// 处理func，转发
+	// 处理func，url转发
 	http.HandleFunc("/", tadyinterview)
+
+	http.HandleFunc("/test", tadyinterview_test)
 
 	log.Fatal(http.ListenAndServe(":9999", nil))
 }
